@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agenda - Estética & Limpeza de Pele</title>
+  <title>Agenda LauGlowSkin</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -13,8 +13,7 @@
     <header class="header">
       <div class="header-top">
         <div class="logo">
-          <i class="fa-solid fa-sparkles"></i>
-          <h1>AGENDA <span>LauGlowSkin</span></h1>
+          <h1><span class="pink-title">LauGlowSkin</span> Agendamentos</h1>
         </div>
         <a href="financeiro.html" class="btn btn-secondary">
           <i class="fa-solid fa-chart-line"></i> Painel Financeiro
@@ -24,7 +23,7 @@
     </header>
 
     <main class="main-content">
-      <!-- Form Section -->
+      <!-- Formulário -->
       <section class="card form-card">
         <h2><i class="fa-regular fa-calendar-plus"></i> Novo Agendamento</h2>
         <form id="booking-form">
@@ -43,6 +42,10 @@
             <select id="service-type" required>
               <option value="Limpeza de Pele Profunda">Limpeza de Pele Profunda</option>
               <option value="Limpeza de Pele com Peeling">Limpeza de Pele com Peeling</option>
+              <option value="Limpeza + Dermaplaning">Limpeza + Dermaplaning</option>
+              <option value="Peeling Rose De Mer">Peeling Rose De Mer</option>
+              <option value="Hidralips">Hidralips</option>
+              <option value="Limpeza + Microagulhamento">Limpeza + Microagulhamento</option>
               <option value="Hidratação Facial">Hidratação Facial</option>
               <option value="Revitalização Facial">Revitalização Facial</option>
             </select>
@@ -71,7 +74,7 @@
         </form>
       </section>
 
-      <!-- List Section -->
+      <!-- Lista de Agendamentos -->
       <section class="card list-card">
         <div class="list-header">
           <h2><i class="fa-regular fa-calendar-check"></i> Próximos Agendamentos</h2>
@@ -82,15 +85,16 @@
           <table id="appointments-table">
             <thead>
               <tr>
-                <th>Cliente</th>
-                <th>Procedimento</th>
-                <th>Valor</th>
-                <th>Data e Hora</th>
-                <th>Ações</th>
+                <th>CLIENTE</th>
+                <th>PROCEDIMENTO</th>
+                <th>VALOR</th>
+                <th>DATA E HORA</th>
+                <th>STATUS</th>
+                <th>AÇÕES</th>
               </tr>
             </thead>
             <tbody id="appointments-list">
-              <!-- Inserido dinamicamente via JS -->
+              <!-- Preenchido via JS -->
             </tbody>
           </table>
           <div id="empty-state" class="empty-state">
