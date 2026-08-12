@@ -12,23 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function formatDate(dateStr) {
+    if (!dateStr) return '';
     const [year, month, day] = dateStr.split('-');
     return `${day}/${month}/${year}`;
   }
 
   function formatMoney(value) {
     return Number(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  }
-
-  function isTomorrow(dateStr) {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
-    const [year, month, day] = dateStr.split('-');
-    const appointmentDate = new Date(year, month - 1, day);
-
-    return appointmentDate.toDateString() === tomorrow.toDateString();
   }
 
   bookingForm.addEventListener('submit', (e) => {
@@ -43,22 +33,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!name || !phone || !date || !time) return;
 
-    const newAppointment = {
+    appointments.push({
       id: Date.now(),
-      name,
-      phone,
-      service,
-      price,
-      date,
-      time
-    };
+      name, phone, service, price, date, time,
+      confirmed: false, paid: false
+    });
 
-    appointments.push(newAppointment);
     appointments.sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
-
     saveAndRender();
     bookingForm.reset();
   });
+
+  window.toggleConfirmed = (id) => {
+    appointments = appointments.map(app => app.id === id ? { ...app, confirmed: !app.confirmed } : app);
+    saveAndRender();
+  };
+
+  window.togglePaid = (id) => {
+    appointments = appointments.map(app => app.id === id ? { ...app, paid: !app.paid } : app);
+    saveAndRender();
+  };
 
   window.deleteAppointment = (id) => {
     if (confirm('Deseja realmente remover este agendamento?')) {
@@ -71,16 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const item = appointments.find(app => app.id === id);
     if (!item) return;
 
+    item.confirmed = true;
+    saveAndRender();
+
     const formattedDate = formatDate(item.date);
-    const message = `Olá, ${item.name}! tudo bem? ✨%0A%0APassando para lembrar do seu agendamento de *${item.service}* amanhã (${formattedDate}) às *${item.time}*.%0A%0APodemos confirmar a sua presença? 🥰`;
+    const message = `Olá, ${item.name}! tudo bem? ✨%0A%0APassando para lembrar do seu agendamento de *${item.service}* no dia (${formattedDate}) às *${item.time}*.%0A%0APodemos confirmar a sua presença? 🥰`;
 
-    let fullPhone = item.phone;
-    if (!fullPhone.startsWith('55') && fullPhone.length <= 11) {
-      fullPhone = '55' + fullPhone;
-    }
-
-    const whatsappUrl = `https://wa.me/${fullPhone}?text=${message}`;
-    window.open(whatsappUrl, '_blank');
+    let fullPhone = item.phone.startsWith('55') ? item.phone : '55' + item.phone;
+    window.open(`https://wa.me/${fullPhone}?text=${message}`, '_blank');
   };
 
   function renderAppointments() {
@@ -97,29 +89,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     appointments.forEach(app => {
       const tr = document.createElement('tr');
-      const isTomorrowBooking = isTomorrow(app.date);
-
       tr.innerHTML = `
-        <td>
-          <strong>${app.name}</strong><br>
-          <small style="color: #666;">${app.phone}</small>
-        </td>
+        <td><strong>${app.name}</strong><br><small style="color: #777;">${app.phone}</small></td>
         <td>${app.service}</td>
         <td><strong>${formatMoney(app.price || 0)}</strong></td>
+        <td>${formatDate(app.date)}<br><small style="color: #666;">às ${app.time}</small></td>
         <td>
-          ${formatDate(app.date)} às ${app.time}
-          ${isTomorrowBooking ? '<span class="badge-tomorrow">Amanhã</span>' : ''}
+          <div class="status-container">
+            <span class="status-tag ${app.confirmed ? 'tag-confirmed' : 'tag-pending'}" onclick="toggleConfirmed(${app.id})">
+              ${app.confirmed ? 'Confirmado' : 'Pendente'}
+            </span>
+            <span class="status-tag ${app.paid ? 'tag-paid' : 'tag-unpaid'}" onclick="togglePaid(${app.id})">
+              ${app.paid ? 'Pago' : 'Não Pago'}
+            </span>
+          </div>
         </td>
         <td class="actions-cell">
-          <button class="btn btn-whatsapp" onclick="sendWhatsAppReminder(${app.id})" title="Enviar Lembrete WhatsApp">
-            <i class="fa-brands fa-whatsapp"></i> Confirmar
-          </button>
-          <button class="btn btn-delete" onclick="deleteAppointment(${app.id})" title="Remover">
-            <i class="fa-solid fa-trash"></i>
-          </button>
+          <button class="btn btn-whatsapp" onclick="sendWhatsAppReminder(${app.id})"><i class="fa-brands fa-whatsapp"></i> Confirmar</button>
+          <button class="btn btn-delete" onclick="deleteAppointment(${app.id})"><i class="fa-solid fa-trash"></i></button>
         </td>
       `;
-
       appointmentsList.appendChild(tr);
     });
   }
