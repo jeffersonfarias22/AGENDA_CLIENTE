@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financeiro - GlowSkin</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <header class="header">
+      <div class="header-top">
+        <div class="logo">
+          <i class="fa-solid fa-chart-pie"></i>
+          <h1>GlowSkin <span>Financeiro</span></h1>
+        </div>
+        <a href="index.html" class="btn btn-secondary">
+          <i class="fa-solid fa-calendar-days"></i> Voltar para Agenda
+        </a>
+      </div>
+      <p>Acompanhe o faturamento e os atendimentos pendentes do seu negócio</p>
+    </header>
+
+    <!-- Filtro de Mês -->
+    <div class="card filter-card" style="margin-bottom: 20px;">
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="month-filter"><i class="fa-regular fa-calendar"></i> Selecione o Mês/Ano para consulta:</label>
+        <input type="month" id="month-filter" style="max-width: 250px;">
+      </div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="stats-grid">
+      <div class="card stat-card">
+        <div class="stat-icon icon-green">
+          <i class="fa-solid fa-sack-dollar"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Faturamento no Mês</h3>
+          <p id="total-revenue">R$ 0,00</p>
+        </div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-icon icon-orange">
+          <i class="fa-solid fa-user-clock"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Clientes a Atender (Mês)</h3>
+          <p id="pending-clients">0 clientes</p>
+        </div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-icon icon-blue">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <h3>Total de Clientes no Mês</h3>
+          <p id="total-month-clients">0 clientes</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista Detalhada -->
+    <section class="card" style="margin-top: 25px;">
+      <h2><i class="fa-solid fa-list-check"></i> Detalhes dos Atendimentos do Mês</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Data/Hora</th>
+              <th>Cliente</th>
+              <th>Procedimento</th>
+              <th>Valor</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="financial-list">
+            <!-- Preenchido via JS -->
+          </tbody>
+        </table>
+        <div id="financial-empty" class="empty-state">
+          <i class="fa-regular fa-folder-open"></i>
+          <p>Nenhum atendimento registrado neste mês.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="financeiro.js"></script>
+</body>
+</html>

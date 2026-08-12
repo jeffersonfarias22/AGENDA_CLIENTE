@@ -1,0 +1,312 @@
+:root {
+  --primary-color: #d4739b;
+  --primary-hover: #c44f80;
+  --bg-color: #f1f1ec;
+  --card-bg: #ffffff;
+  --text-main: #333333;
+  --text-muted: #666666;
+  --whatsapp-color: #25d366;
+  --whatsapp-hover: #1ebd56;
+  --danger-color: #e63946;
+  --border-radius: 12px;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.app-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary-color);
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.header h1 span {
+  font-weight: 300;
+  color: var(--text-main);
+}
+
+.header p {
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 25px;
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+}
+
+.card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text-main);
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary-color);
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: white;
+  margin-top: 10px;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background-color: #f5f5f5;
+}
+
+/* Table & List Styles */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.badge-count {
+  background-color: #f1f1f1;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  padding: 12px;
+  border-bottom: 2px solid #eee;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #f5f5f5;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-whatsapp {
+  background-color: var(--whatsapp-color);
+  color: white;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.btn-whatsapp:hover {
+  background-color: var(--whatsapp-hover);
+}
+
+.btn-delete {
+  background-color: #f8d7da;
+  color: var(--danger-color);
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.btn-delete:hover {
+  background-color: #f5c2c7;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  display: none;
+}
+
+.empty-state i {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.badge-tomorrow {
+  background-color: #fff3cd;
+  color: #856404;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 5px;
+  font-weight: 600;
+}
+
+/* Dashboard / Financeiro Styles */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.icon-green { background-color: #e8f5e9; color: #2e7d32; }
+.icon-orange { background-color: #fff3e0; color: #ef6c00; }
+.icon-blue { background-color: #e3f2fd; color: #1565c0; }
+
+.stat-info h3 {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.stat-info p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.status-pending { background-color: #fff3cd; color: #856404; }
+.status-done { background-color: #d1e7dd; color: #0f5132; }

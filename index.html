@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda - Estética & Limpeza de Pele</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <header class="header">
+      <div class="header-top">
+        <div class="logo">
+          <i class="fa-solid fa-sparkles"></i>
+          <h1>AGENDA <span>LauGlowSkin</span></h1>
+        </div>
+        <a href="financeiro.html" class="btn btn-secondary">
+          <i class="fa-solid fa-chart-line"></i> Painel Financeiro
+        </a>
+      </div>
+      <p>Gerencie seus horários de limpeza de pele e lembretes de WhatsApp</p>
+    </header>
+
+    <main class="main-content">
+      <!-- Form Section -->
+      <section class="card form-card">
+        <h2><i class="fa-regular fa-calendar-plus"></i> Novo Agendamento</h2>
+        <form id="booking-form">
+          <div class="form-group">
+            <label for="client-name">Nome da Cliente</label>
+            <input type="text" id="client-name" placeholder="Ex: Maria Silva" required>
+          </div>
+
+          <div class="form-group">
+            <label for="client-phone">WhatsApp (com DDD)</label>
+            <input type="tel" id="client-phone" placeholder="Ex: 11999998888" required>
+          </div>
+
+          <div class="form-group">
+            <label for="service-type">Procedimento</label>
+            <select id="service-type" required>
+              <option value="Limpeza de Pele Profunda">Limpeza de Pele Profunda</option>
+              <option value="Limpeza de Pele com Peeling">Limpeza de Pele com Peeling</option>
+              <option value="Hidratação Facial">Hidratação Facial</option>
+              <option value="Revitalização Facial">Revitalização Facial</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="service-price">Valor do Atendimento (R$)</label>
+            <input type="number" id="service-price" step="0.01" placeholder="Ex: 150.00" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="booking-date">Data</label>
+              <input type="date" id="booking-date" required>
+            </div>
+
+            <div class="form-group">
+              <label for="booking-time">Horário</label>
+              <input type="time" id="booking-time" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-check"></i> Agendar Cliente
+          </button>
+        </form>
+      </section>
+
+      <!-- List Section -->
+      <section class="card list-card">
+        <div class="list-header">
+          <h2><i class="fa-regular fa-calendar-check"></i> Próximos Agendamentos</h2>
+          <div class="badge-count" id="appointment-count">0 agendamentos</div>
+        </div>
+
+        <div class="table-wrapper">
+          <table id="appointments-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Procedimento</th>
+                <th>Valor</th>
+                <th>Data e Hora</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="appointments-list">
+              <!-- Inserido dinamicamente via JS -->
+            </tbody>
+          </table>
+          <div id="empty-state" class="empty-state">
+            <i class="fa-regular fa-calendar-xmark"></i>
+            <p>Nenhum agendamento cadastrado no momento.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
